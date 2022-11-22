@@ -6,9 +6,15 @@
           <ul className="u-nav u-unstyled u-nav-1">
             <li className="u-nav-item u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-1">
               <RouterLink className="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                to="/" rel="nofollow"
-                :style="{ padding: '10px 20px' }"
+                to="/layout" rel="nofollow" v-if="loggedIn"
+                :style="{ padding: '10px 20px' }" @click="logout()"
             >Logout</RouterLink>
+            </li>
+            <li className="u-nav-item u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-1">
+              <RouterLink className="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                to="/login" rel="nofollow" v-if="!loggedIn"
+                :style="{ padding: '10px 20px' }"
+            >Login</RouterLink>
             </li>
           </ul>
         </div>
@@ -18,6 +24,26 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      loggedIn: Boolean
+    }
+  },
+
+  created() {
+    this.loggedIn = localStorage.getItem('loggedIn');
+  },
+  watch: {
+    loggedIn: function () {
+     this.loggedIn = localStorage.getItem('loggedIn')
+    }
+  },
+
+  methods: {
+    logout() {
+      localStorage.clear()
+    }
+  }
 
 }
 </script>

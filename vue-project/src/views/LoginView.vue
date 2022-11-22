@@ -44,12 +44,15 @@ export default {
   methods: {
     navigateTo() {
       if (this.login === 'admin' && this.password === 'admin') {
+        localStorage.setItem('loggedIn', true)
         router.push('/admin')
         return;
       } else if (this.login === 'user' && this.password === 'user') {
+        localStorage.setItem('loggedIn', true)
         router.push('/product')
         return;
       } else {
+        localStorage.setItem('loggedIn', false)
         router.push('/')
         return;
       }
