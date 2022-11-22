@@ -44,7 +44,10 @@ export default {
   },
   methods: {
     getProductList() {
-      axios.get('http://localhost:3000/products').then(value => this.productList = value.data);
+      axios.get('http://localhost:3000/products').then(value => {
+            this.productList = value.data;
+            this.findedProductList = JSON.parse(JSON.stringify(value.data));
+      });
     },
     search(productName) {
       let find = []
